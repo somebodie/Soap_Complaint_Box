@@ -4,10 +4,13 @@ var Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 
 var UserSchema = new Schema({
+  username: String,
+  full_name: String,
   email: String,
   password_digest: String,
   created_at: Date,
-  updated_at: Date
+  updated_at: Date,
+  feedback: []
 });
 
 UserSchema.pre('save', function(next) {
@@ -21,5 +24,5 @@ UserSchema.pre('save', function(next) {
 var UserModel = mongoose.model('User', UserSchema);
 
 module.exports = {
-  User: UserModel
+  User: UserModel,
 }

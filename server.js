@@ -30,4 +30,6 @@ app.use(session({
 app.use('/users', usersController);
 app.use('/sessions', sessionsController);
 
-app.listen(4000);
+app.listen(4000, function() {
+  console.log("4000!!!! Listening!");
+});
