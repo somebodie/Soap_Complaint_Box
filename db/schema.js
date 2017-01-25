@@ -21,7 +21,7 @@ var UserSchema = new Schema({
   password_digest: String,
   created_at: Date,
   updated_at: Date,
-  feedback: [feedbackSchema]
+  feedback: [FeedbackSchema]
 });
 
 UserSchema.pre('save', function(next) {
@@ -37,5 +37,5 @@ var FeedbackModel = mongoose.model('Feedback', FeedbackSchema)
 
 module.exports = {
   User: UserModel,
-  FB: FeedbackModel
+  Fb: FeedbackModel
 }
