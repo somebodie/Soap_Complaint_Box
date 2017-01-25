@@ -3,6 +3,17 @@ var Schema = mongoose.Schema;
 
 mongoose.Promise = global.Promise;
 
+var FeedbackSchema= new Schema ({
+  feedback: String,
+  subject: String,
+  detail: String,
+  resolve: Boolean,
+  sort: {
+    postive: Boolean,
+    negative: Boolean
+  }
+});
+
 var UserSchema = new Schema({
   username: String,
   full_name: String,
@@ -10,7 +21,7 @@ var UserSchema = new Schema({
   password_digest: String,
   created_at: Date,
   updated_at: Date,
-  feedback: []
+  feedback: [feedbackSchema]
 });
 
 UserSchema.pre('save', function(next) {
@@ -22,7 +33,9 @@ UserSchema.pre('save', function(next) {
 });
 
 var UserModel = mongoose.model('User', UserSchema);
+var FeedbackModel = mongoose.model('Feedback', FeedbackSchema)
 
 module.exports = {
   User: UserModel,
+  FB: FeedbackModel
 }
