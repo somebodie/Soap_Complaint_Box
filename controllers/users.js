@@ -5,14 +5,14 @@ var User = require('../models/user.js');
 var mongoose = require('mongoose');
 var Fb = require('../models/feedback.js');
 
-router.get('/', function(req, res) {
-  User.find({})
-  .exec(function(err, users){
-    if (err) { console.log(err); }
-    res.render('users/index.hbs', { users: users })
-// TODO: Current shows all users on index but will want his to change to a different page
-  });
-})
+// router.get('/', function(req, res) {
+//   User.find({})
+//   .exec(function(err, users){
+//     if (err) { console.log(err); }
+//     res.render('users/index.hbs', { users: users })
+// // TODO: Current shows all users on index but will want his to change to a different page
+//   });
+// })
 //
 // router.get('/:id', function(req, res) {
 //   User.findById(req.params.id)
