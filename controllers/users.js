@@ -48,18 +48,18 @@ router.get('/:id', function(req, res) {
   });
 })
 
-// USER UPDATE ROUTE
-router.patch('/:id', function(req, res){
-  User.findByIdAndUpdate(req.params.id, {
-    first_name: req.body.first_name,
-    email: req.body.email
-  }, {new: true})
-  .exec(function(err, user) {
-    if (err) console.log(err);
-    console.log(user);
-    res.send(user);
-  });
-});
+// // USER UPDATE ROUTE
+// router.patch('/:id', function(req, res){
+//   User.findByIdAndUpdate(req.params.id, {
+//     first_name: req.body.first_name,
+//     email: req.body.email
+//   }, {new: true})
+//   .exec(function(err, user) {
+//     if (err) console.log(err);
+//     console.log(user);
+//     res.send(user);
+//   });
+// });
 
 // // USER DESTROY
 // router.delete('/:id', function(req, res){

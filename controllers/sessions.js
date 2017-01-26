@@ -8,14 +8,13 @@ router.get('/login', function(req, res) {
 })
 
 // router.post('/login', authHelpers.loginUser, function(req, res){
-//   res.redirect('/feedback')
-//   // TODO: change landing
+//   res.redirect('/users/' + req.session.currentUser._id);
 // });
-//
-// router.delete('/', function(req, res){
-//   req.session.destroy(function(){
-//     res.redirect('/users');
-//   });
-// })
-//
+
+router.delete('/', function(req, res){
+  req.session.destroy(function(){
+    res.redirect('/users');
+  });
+});
+
 module.exports = router;
