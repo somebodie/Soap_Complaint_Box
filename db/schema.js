@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 
 var FeedbackSchema= new Schema ({
-  feedback: String,
   subject: String,
   detail: String,
   resolve: Boolean,

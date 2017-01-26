@@ -10,4 +10,15 @@ router.get('/', function(req, res) {
   res.render('feedback/allfeedback.hbs');
 });
 
+// Feedback UPDATE ROUTE
+router.patch('/:id', function(req, res){
+
+});
+
+// Feedback DESTROY
+router.delete('/:id', function(req, res){
+
+});
+
+
 module.exports = router;
