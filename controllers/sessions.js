@@ -11,12 +11,11 @@ router.get('/login', function(req, res) {
 //   res.redirect('/users')
 //   // TODO: changed landing
 // });
-
-
-router.delete('/', function(req, res){
-  req.session.destroy(function(){
-    res.redirect('/users');
-  });
-})
-
+//
+// router.delete('/', function(req, res){
+//   req.session.destroy(function(){
+//     res.redirect('/users');
+//   });
+// })
+//
 module.exports = router;

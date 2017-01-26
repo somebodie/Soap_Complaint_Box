@@ -1,4 +1,3 @@
-
 var bcrypt = require('bcrypt');
 var User = require('../models/user.js');
 
@@ -28,9 +27,9 @@ function loginUser(req, res, next) {
   });
 }
 
-function authorize(req, res, next) {
-
-};
+// function authorize(req, res, next) {
+// TODO: fill in
+// };
 
 module.exports = {
   createSecure: createSecure,
