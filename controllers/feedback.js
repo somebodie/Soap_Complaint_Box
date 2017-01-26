@@ -5,4 +5,8 @@ var User = require('../models/user.js');
 var mongoose = require('mongoose');
 var Fb = require('../models/feedback.js');
 
+router.get('/', function(req, res) {
+  res.render('feedback/allfeedback.hbs');
+});
+
 module.exports = router;
