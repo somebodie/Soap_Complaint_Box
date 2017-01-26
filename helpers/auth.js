@@ -27,12 +27,17 @@ function loginUser(req, res, next) {
   });
 }
 
-// function authorize(req, res, next) {
-// TODO: fill in
-// };
+function authorized(req, res, next) {
+  var currentUser = req.session.currentUser;
+  if (!currentUser || currentUser._id !== req.params.id) {
+    return res.json({status: 404})
+  } else {
+    next()
+  }
+}
 
 module.exports = {
   createSecure: createSecure,
   loginUser: loginUser,
-  // auth: auth
+  authorized: authorized
 }
