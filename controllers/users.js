@@ -34,7 +34,7 @@ router.post('/', authHelpers.createSecure, function(req, res){
     if (err) console.log(err);
 
     console.log(user);
-    res.redirect('/users/allusers.hbs');
+    res.redirect('/users/allusers');
   });
 });
 
