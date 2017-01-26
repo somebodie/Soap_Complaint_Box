@@ -7,6 +7,7 @@ var logger = require('morgan');
 var hbs = require('hbs')
 var mongoose = require('mongoose');
 
+
 var usersController = require('./controllers/users.js');
 var sessionsController = require('./controllers/sessions.js');
 var feedbackController = require('./controllers/feedback.js');
@@ -14,7 +15,8 @@ var feedbackController = require('./controllers/feedback.js');
 var app = express();
 
 // ADD THE NAME OF YOUR DATABASE
-mongoose.connect('mongodb://localhost/sbc');
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/sbc';
+mongoose.connect('mongoURI');
 
 app.set('view engine', 'hbs')
 
