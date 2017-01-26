@@ -33,7 +33,7 @@ router.get('/signup', function(req, res){
 //     if (err) console.log(err);
 //
 //     console.log(user);
-//     res.redirect('/users');
+//     res.redirect('/users/feedback.hbs');
 // // TODO: change signup redirect to feedback
 //   });
 // });

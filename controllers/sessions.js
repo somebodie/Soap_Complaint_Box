@@ -8,8 +8,8 @@ router.get('/login', function(req, res) {
 })
 
 // router.post('/login', authHelpers.loginUser, function(req, res){
-//   res.redirect('/users')
-//   // TODO: changed landing
+//   res.redirect('/feedback.hbs')
+//   // TODO: change landing
 // });
 //
 // router.delete('/', function(req, res){
