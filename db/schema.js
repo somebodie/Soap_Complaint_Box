@@ -37,5 +37,5 @@ var FeedbackModel = mongoose.model('Feedback', FeedbackSchema)
 
 module.exports = {
   User: UserModel,
-  Fb: FeedbackModel
+  Feedback: FeedbackModel
 }
