@@ -38,15 +38,22 @@ router.get('/', function(req, res) {
 //   });
 // });
 
-// Feedback UPDATE ROUTE
-router.patch('/:id', function(req, res){
+// // Feedback Edit Route
+// router.get('NEED TO DETERMINE ROUTE', function(req, res) {
+//   // FIXME: need to detrmine what will be edited
+// });
 
-});
+// // Feedback UPDATE ROUTE
+// router.patch('/:id', function(req, res){
+// // FIXME: after determine create determine how to fix
+// });
 
-// Feedback DESTROY
-router.delete('/:id', function(req, res){
-
-});
+// // Feedback DESTROY
+// router.delete('/:id', function(req, res){
+//   user.feedback.splice(req.params.id, 1); //remove the item from the array
+//
+//   res.redirect('/');
+// });
 
 
 module.exports = router;

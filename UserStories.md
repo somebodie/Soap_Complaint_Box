@@ -2,7 +2,7 @@ This is a basic feedback app. In this app the User will brought to a main index 
 
 Guest:
 From the index use the site as a guest. If using as guest they will be able to see the feedback in the site.
-They will see the show page of one of the feedbacks as well. However they will not be able to acess any other part of the site.
+They will see the show page of one of the feedbacks as well. However they will not be able to access any other part of the site.
 
 New User:
 They can sign up to use the page. This give them the same rights as a user.
