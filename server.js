@@ -35,6 +35,6 @@ app.use('/users', usersController);
 app.use('/sessions', sessionsController);
 app.use('/feedback', feedbackController);
 
-app.listen(4000, function() {
-  console.log("4000!!!! Listening!");
+app.listen(process.env.PORT || 4000, function() {
+  console.log("AHOY! Your on port!");
 });
