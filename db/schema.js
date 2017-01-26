@@ -7,10 +7,7 @@ var FeedbackSchema= new Schema ({
   subject: String,
   detail: String,
   resolve: Boolean,
-  sort: {
-    postive: Boolean,
-    negative: Boolean
-  },
+  type: Boolean,
   views: Number,
   created_at: Date,
   updated_at: Date

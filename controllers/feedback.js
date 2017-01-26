@@ -7,7 +7,9 @@ var Feedback = require('../models/feedback.js');
 
 // TODO: http://localhost:4000/feedback
 router.get('/', function(req, res) {
-  res.render('feedback/allfeedback.hbs');
+  //Feedback.find()
+  //db.feedback.find()
+  res.render('feedback/allfeedback.hbs', {feedback: feedback});
 });
 
 // // Feedback post TODO: http://localhost:4000/feedback/newpost
@@ -16,26 +18,34 @@ router.get('/', function(req, res) {
 // })
 
 // router.post('/', authHelpers.authorized, function(req, res){
-//   var FeedbackSchema= new Schema ({
+
+ //this route will do 2 things at once:
+  //1 .Create and save Feedback to feedback collection
+  //2. Find the user this feedback belongs to and push it in that users' feedback array
+      //why would we also do option 1? this will save time to access Feedback without the user
+      // why would we do option 2? So that we can access feedback via the user
+
+//   var newFeedback = new Feedback ({
 //     subject: req.body.subject,
 //     detail: req.body.detail,
-//     // resolve:
-//     // sort: {
-//     //   postive: ,
-//     //   negative:
-//     // },
+//     resolve: false,
+//     type: req.body.type,
 //     // views:
-//     // created_at:
-//     // updated_at:
 //   });
 //
-//   Feedback.save(function(err, user){
+//   Feedback.save(function(err, feedback){
 //     if (err) console.log(err);
 //
 //     console.log(user);
 //     console.log(Feedback.subject);
-    // res.redirect('/users/allfeedback');
+
 //   });
+
+  //User.findById(req.session.currentUser._id)
+  //access User.feedback
+  //User.feedback.push(newFeedback)
+  //.exec() <-- res.redirect back out
+
 // });
 
 // // Feedback Edit Route
