@@ -15,9 +15,10 @@ var FeedbackSchema= new Schema ({
 });
 
 var UserSchema = new Schema({
-  username: String,
-  full_name: String,
-  email: String,
+  username: {type: String, unique: true, required: true},
+  email: {type: String, unique: true, required: true},
+  first_name: String,
+  last_name: String,
   password_digest: String,
   created_at: Date,
   updated_at: Date,

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user.js');
-// var authHelpers = require('../helpers/auth.js')
+var authHelpers = require('../helpers/auth.js')
 var mongoose = require('mongoose');
 var Fb = require('../models/feedback.js');
 
@@ -21,22 +21,22 @@ router.get('/signup', function(req, res){
   res.render('users/signup.hbs');
 });
 
-// router.post('/', authHelpers.createSecure, function(req, res){
-//   var user = new User({
-//     username: req.body.username,
-//     full_name: req.body.name,
-//     email: req.body.email,
-//     password_digest: res.hashedPassword
-//   });
-//
-//   user.save(function(err, user){
-//     if (err) console.log(err);
-//
-//     console.log(user);
-//     res.redirect('/users/feedback.hbs');
-// // TODO: change signup redirect to feedback
-//   });
-// });
+router.post('/', authHelpers.createSecure, function(req, res){
+  var user = new User({
+    username: req.body.username,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    password_digest: res.hashedPassword
+  });
+
+  user.save(function(err, user){
+    if (err) console.log(err);
+
+    console.log(user);
+    res.redirect('/users/allusers.hbs');
+  });
+});
 
 // router.get('/:id', function(req, res) {
 //   User.findById(req.params.id)
