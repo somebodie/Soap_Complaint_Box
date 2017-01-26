@@ -8,7 +8,7 @@ router.get('/login', function(req, res) {
 })
 
 // router.post('/login', authHelpers.loginUser, function(req, res){
-//   res.redirect('/feedback.hbs')
+//   res.redirect('/feedback')
 //   // TODO: change landing
 // });
 //
