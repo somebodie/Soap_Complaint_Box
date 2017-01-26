@@ -9,7 +9,7 @@ var Feedback = require('../models/feedback.js');
 router.get('/', function(req, res) {
   //Feedback.find()
   //db.feedback.find()
-  res.render('feedback/allfeedback.hbs', {feedback: feedback});
+  res.render('feedback/allfeedback.hbs'); //{feedback: feedback}
 });
 
 // // Feedback post TODO: http://localhost:4000/feedback/newpost
