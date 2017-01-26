@@ -15,8 +15,8 @@ var feedbackController = require('./controllers/feedback.js');
 var app = express();
 
 // ADD THE NAME OF YOUR DATABASE
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/sbc';
-mongoose.connect('mongoURI');
+var mongoURI =  process.env.MONGODB_URI || 'mongodb://localhost/sbc';
+mongoose.connect(mongoURI);
 
 app.set('view engine', 'hbs')
 
@@ -35,6 +35,6 @@ app.use('/users', usersController);
 app.use('/sessions', sessionsController);
 app.use('/feedback', feedbackController);
 
-app.listen(process.env.PORT || 4000, function() {
+app.listen(process.env.PORT || 4000,  function() {
   console.log("AHOY! Your on port!");
 });
