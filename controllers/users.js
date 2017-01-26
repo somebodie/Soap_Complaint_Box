@@ -38,29 +38,29 @@ router.post('/', authHelpers.createSecure, function(req, res){
   });
 });
 
-// router.get('/:id', function(req, res) {
-//   User.findById(req.params.id)
-//   .exec(function(err, user) {
-//     if (err) console.log(err);
-//     console.log(user);
-//     res.render('users/show.hbs', { user } );
-// // TODO: when /:id is request the id takes them to there show page
-//   });
-// })
+router.get('/:id', function(req, res) {
+  User.findById(req.params.id)
+  .exec(function(err, user) {
+    if (err) console.log(err);
+    console.log(user);
+    res.render('users/show.hbs', { user } );
+// TODO: when /:id is request the id takes them to there show page
+  });
+})
 
-// // USER UPDATE ROUTE
-// router.patch('/:id', function(req, res){
-//   User.findByIdAndUpdate(req.params.id, {
-//     first_name: req.body.first_name,
-//     email: req.body.email
-//   }, {new: true})
-//   .exec(function(err, user) {
-//     if (err) console.log(err);
-//     console.log(user);
-//     res.send(user);
-//   });
-// });
-//
+// USER UPDATE ROUTE
+router.patch('/:id', function(req, res){
+  User.findByIdAndUpdate(req.params.id, {
+    first_name: req.body.first_name,
+    email: req.body.email
+  }, {new: true})
+  .exec(function(err, user) {
+    if (err) console.log(err);
+    console.log(user);
+    res.send(user);
+  });
+});
+
 // // USER DESTROY
 // router.delete('/:id', function(req, res){
 //   User.findByIdAndRemove(req.params.id)
