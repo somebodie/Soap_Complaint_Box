@@ -4,8 +4,7 @@ var User = require('../models/user.js');
 var authHelpers = require('../helpers/auth.js')
 var mongoose = require('mongoose');
 var Feedback = require('../models/feedback.js');
-// var currentUser = req.session.currentUser._id;
-
+var async = require("async");
 
 // TODO: http://localhost:4000/feedback
 router.get('/', function(req, res) {
@@ -26,7 +25,7 @@ router.get('/newpost', authHelpers.authorized, function(req, res) {
 });
 
 router.post('/', function(req, res) {
-
+var user = req.session.currentUser;
     //this route will do 2 things at once:
     //1 .Create and save Feedback to feedback collection
     //2. Find the user this feedback belongs to and push it in that users' feedback array
@@ -41,26 +40,23 @@ router.post('/', function(req, res) {
         // views:
     });
 
+
     newFeedback.save(function(err, feedback) {
         if (err) console.log(err);
-
-        console.log(feedback);
-
-
-
-        User.find(currentUser, function(err, currentUser) {
-            currentUser.feedback.push(feedback);
-            // FIXME: push is not working or showin on user
-
-
-        user.save(function(err, user) {
-            if (err) console.log(err);
-
-            console.log(user);
-          res.redirect('feedback/' + feedback._id);
-            });
-        });
-    });
+        else {
+          async.each(user.feedback, save, function(err){
+            // if any of the saves produced an error, err would equal that error
+          });
+          // user.feedback.push(feedback);
+          console.log(newPost);
+        }
+        // console.log(feedback);
+        // console.log(
+        // req.session.currentUser);
+        // console.log(feedback._id);
+      });
+          // res.redirect('feedback/' + feedback._id);
+    // });
 });
 
 //Feedback Show Route
@@ -106,7 +102,7 @@ router.patch('/:id', function(req, res){
 router.delete('/:id', function(req, res) {
     currentUser.feedback.splice(req.params.id, 1); //remove the item from the array
 
-    res.redirect('/');
+    res.redirect('/feedback');
 });
 
 

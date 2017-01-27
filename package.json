@@ -12,6 +12,7 @@
   "author": "Audrey Redman",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.1.4",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.16.0",
     "express": "^4.14.0",

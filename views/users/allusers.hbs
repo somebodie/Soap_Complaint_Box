@@ -1,4 +1,7 @@
 <h1>ALL THE USERS:</h1>
 {{#each users}}
     <a href="/users/{{_id}}">{{username}}</a>
+    <form method="post" action="/sessions?_method=DELETE">
+      <input type="submit" value="delete">
+    </form>
 {{/each}}
