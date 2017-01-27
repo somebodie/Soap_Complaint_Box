@@ -1,0 +1,21 @@
+<h2>Edit this feedback</h2>
+<form action="/feedback/{{feedback._id}}?_method=PUT" method="patch">
+  <div>
+    <label for="subject">subject:</label>
+ <input type="text" name="subject" value="{{user.feedback.subject}}"/>
+</div>
+<div>
+  <label for="detail">details:</label>
+  <textarea>{{user.feedback.details}}</textarea>
+</div>
+<div>
+  <label for="type">type:</label>
+<input type="radio" name="type" value="postive">postive<br>
+<input type="radio" name="type" value="negative">negative<br>
+</div>
+<!-- <div>
+  <label for="completed">completed:</label>
+ <input type="checkbox" name="completed" value="{{user.name.completed}}"/>
+</div> -->
+  <input type="submit" name="" value="Submit Changes">
+</form>

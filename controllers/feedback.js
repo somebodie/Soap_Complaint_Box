@@ -4,6 +4,8 @@ var User = require('../models/user.js');
 var authHelpers = require('../helpers/auth.js')
 var mongoose = require('mongoose');
 var Feedback = require('../models/feedback.js');
+// var currentUser = req.session.currentUser._id;
+
 
 // TODO: http://localhost:4000/feedback
 router.get('/', function(req, res) {
@@ -45,23 +47,23 @@ router.post('/', function(req, res) {
         console.log(feedback);
 
 
-        var currentUser = req.session.currentUser._id;
 
         User.find(currentUser, function(err, currentUser) {
             currentUser.feedback.push(feedback);
             // FIXME: push is not working or showin on user
-        });
+
 
         user.save(function(err, user) {
             if (err) console.log(err);
 
             console.log(user);
-            res.render('feedback/allfeedback.hbs');
+          res.redirect('feedback/' + feedback._id);
+            });
         });
     });
 });
 
-//Feedback Show Route testing:588ae8ee6b73cd3daabbdbee
+//Feedback Show Route
 router.get('/:id', function (req, res) {
   Feedback.findById(req.params.id)
       .exec(function(err, feedback) {
@@ -74,17 +76,17 @@ router.get('/:id', function (req, res) {
       });
 });
 
-// Feedback Edit Route
+// Feedback Edit Route testing:588ae8ee6b73cd3daabbdbee || 588b6a3163eee705ae0d2a6b
 router.get('/:id/edit', function(req, res) {
-  var item = Feedback.findById(req.params.id).exec()
+  var item = Feedback.findById(req.params.id).exec();
 
   item.then(function(feedback) {
-    res.render('feedback/edit', user)
+    res.render('feedback/edit', feedback);
   })
   .catch(function(err) {
-    console.log(err)
-  })
-})
+    console.log(err);
+  });
+});
 
 // Feedback UPDATE ROUTE
 router.patch('/:id', function(req, res){
