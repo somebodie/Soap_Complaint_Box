@@ -49,6 +49,7 @@ router.post('/', function(req, res) {
 
         User.find(currentUser, function(err, currentUser) {
             currentUser.feedback.push(feedback);
+            // FIXME: push is not working or showin on user
         });
 
         user.save(function(err, user) {
@@ -87,8 +88,17 @@ router.get('/:id/edit', function(req, res) {
 
 // Feedback UPDATE ROUTE
 router.patch('/:id', function(req, res){
-// FIXME: after determine create determine how to fix
-});
+  var editFeedback = Feedback.findByIdAndUpdate(req.params.id);
+
+  editFeedback.subject = req.body.subject,
+  editFeedback.detail = req.body.detail,
+  editFeedback.type = req.params.type,
+   { new: true }
+  .exec(function(err, feedback){
+    if (err) { console.log(err); }
+    console.log(feedback);
+    res.redirect('/:id/show')
+  });});
 
 // Feedback DESTROY
 router.delete('/:id', function(req, res) {
