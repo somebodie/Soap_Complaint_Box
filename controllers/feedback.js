@@ -39,43 +39,63 @@ router.post('/', function(req, res) {
         // views:
     });
 
-    Feedback.save(function(err, feedback) {
+    newFeedback.save(function(err, feedback) {
         if (err) console.log(err);
 
         console.log(feedback);
+
+
+        var currentUser = req.session.currentUser._id;
+
+        User.find(currentUser, function(err, currentUser) {
+            currentUser.feedback.push(feedback);
+        });
+
+        user.save(function(err, user) {
+            if (err) console.log(err);
+
+            console.log(user);
+            res.render('feedback/allfeedback.hbs');
+        });
     });
-
-    var currentUser = req.session.currentUser._id;
-
-    User.find(currentUser, function(err, user) {
-        user.feedback.push(newFeedback);
-    });
-
-    user.save(function(err, user) {
-        if (err) console.log(err);
-
-        console.log(user);
-        res.render('feedback/allfeedback.hbs');
-    });
-
 });
 
-// // Feedback Edit Route
-// router.get('NEED TO DETERMINE ROUTE', function(req, res) {
-//   // FIXME: need to detrmine what will be edited
-// });
+//Feedback Show Route testing:588ae8ee6b73cd3daabbdbee
+router.get('/:id', function (req, res) {
+  Feedback.findById(req.params.id)
+      .exec(function(err, feedback) {
+          if (err) console.log(err);
+          console.log(feedback);
+          res.render('feedback/show.hbs', {
+              feedback
+          });
+          // TODO: when /:id is request the id takes them to there show page
+      });
+});
 
-// // Feedback UPDATE ROUTE
-// router.patch('/:id', function(req, res){
-// // FIXME: after determine create determine how to fix
-// });
+// Feedback Edit Route
+router.get('/:id/edit', function(req, res) {
+  var item = Feedback.findById(req.params.id).exec()
 
-// // Feedback DESTROY
-// router.delete('/:id', function(req, res){
-//   user.feedback.splice(req.params.id, 1); //remove the item from the array
-//
-//   res.redirect('/');
-// });
+  item.then(function(feedback) {
+    res.render('feedback/edit', user)
+  })
+  .catch(function(err) {
+    console.log(err)
+  })
+})
+
+// Feedback UPDATE ROUTE
+router.patch('/:id', function(req, res){
+// FIXME: after determine create determine how to fix
+});
+
+// Feedback DESTROY
+router.delete('/:id', function(req, res) {
+    currentUser.feedback.splice(req.params.id, 1); //remove the item from the array
+
+    res.redirect('/');
+});
 
 
 module.exports = router;
