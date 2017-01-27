@@ -1,10 +1,9 @@
 <h1>This is the feedback:</h1>
 <h3><a href="/feedback/newpost">Make New Feedback:</a></h3>
+
 {{#each feedback}}
 <ul>
-<li> {{subject}} </li>
-<form action="/feedback/{{_id}}?_method=DELETE" method="POST">
-  <input type="submit" value="DELETE">
+<a href="/feedback/{{_id}}"><li>{{subject}}</li></a>
 </form>
 </ul>
 {{/each}}

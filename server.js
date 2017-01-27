@@ -19,12 +19,14 @@ var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/sbc';
 mongoose.connect(mongoURI);
 
 app.set('view engine', 'hbs')
+app.set('public')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(logger('dev'));
+app.use(express.static("public"));//TODO examine further since not showing everywhere
 app.use(methodOverride('_method'));
 
 app.use(session({

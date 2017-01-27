@@ -15,7 +15,6 @@ router.get('/', function(req, res) {
         res.render('feedback/allfeedback.hbs', {
             feedback: feedback
         });
-
     });
 });
 
@@ -23,6 +22,11 @@ router.get('/', function(req, res) {
 router.get('/newpost', authHelpers.authorized, function(req, res) {
     res.render('feedback/newpost.hbs');
 });
+//this route will do 2 things at once:
+//1 .Create and save Feedback to feedback collection
+//2. Find the user this feedback belongs to and push it in that users' feedback array
+//why would we also do option 1? this will save time to access Feedback without the user
+// why would we do option 2? So that we can access feedback via the user
 
 router.post('/', function(req, res) {
   //Find the logged in User
@@ -31,59 +35,18 @@ router.post('/', function(req, res) {
   User.findById(req.session.currentUser._id).exec(function(err, user) {
     var newFeedback = new Feedback({
          subject: req.body.subject,
+         detail: req.body.detail,
+         // type: req.params.type,
      });
-
     newFeedback.save(function(err, feedback) {
       console.log("FEEDBACK SAVED YAY", feedback);
       user.feedback.push(feedback);
-
       user.save();
-
       console.log("USER SAVED?", user);
-
       res.redirect('feedback/' + feedback._id);
     })
-
-
-
   });
 });
-
-
-// router.post('/', function(req, res) {
-// var user = req.session.currentUser;
-//     //this route will do 2 things at once:
-//     //1 .Create and save Feedback to feedback collection
-//     //2. Find the user this feedback belongs to and push it in that users' feedback array
-//     //why would we also do option 1? this will save time to access Feedback without the user
-//     // why would we do option 2? So that we can access feedback via the user
-//
-//     var newFeedback = new Feedback({
-//         subject: req.body.subject,
-//         detail: req.body.detail,
-//         // resolve: false,
-//         type: req.params.type,
-//         // views:
-//     });
-//
-//
-//     newFeedback.save(function(err, feedback) {
-//         if (err) console.log(err);
-//         // else {
-//           // async.each(user.feedback, save, function(err){
-//             // if any of the saves produced an error, err would equal that error
-//           // });
-//           user.feedback.push(feedback);
-//           console.log(newPost);
-//         // }
-//         // console.log(feedback);
-//         // console.log(
-//         // req.session.currentUser);
-//         // console.log(feedback._id);
-//       });
-//           // res.redirect('feedback/' + feedback._id);
-//     // });
-// });
 
 //Feedback Show Route
 router.get('/:id', function (req, res) {
@@ -111,25 +74,20 @@ router.get('/:id/edit', function(req, res) {
 });
 
 // Feedback UPDATE ROUTE
-router.patch('/:id', function(req, res){
-  var editFeedback = Feedback.findByIdAndUpdate(req.params.id);
-
-  editFeedback.subject = req.body.subject,
-  editFeedback.detail = req.body.detail,
-  editFeedback.type = req.params.type,
-   { new: true }
+router.patch('/:id', authHelpers.authorized, function(req, res){
+  Feedback.findByIdAndUpdate(req.params.id)
   .exec(function(err, feedback){
     if (err) { console.log(err); }
-    console.log(feedback);
-    res.redirect('/:id/show')
-  });});
+    console.log('ALL THE WAY THROUGH', feedback);
+   });
+});
 
 // Feedback DESTROY
-router.delete('/:id', function(req, res) {
-    currentUser.feedback.splice(req.params.id, 1); //remove the item from the array
-
-    res.redirect('/feedback');
-});
+// router.delete('/id', authHelpers.authorized, function(req, res){
+// findbyidanddelete
+//     res.redirect('/feedback')
+//   });
+// });
 
 
 module.exports = router;
