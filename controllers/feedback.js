@@ -78,7 +78,6 @@ router.patch('/:id', authHelpers.authorized, function(req, res){
   Feedback.findByIdAndUpdate(req.params.id)
   .exec(function(err, feedback){
     if (err) { console.log(err); }
-    console.log('ALL THE WAY THROUGH', feedback);
    });
 });
 
