@@ -39,6 +39,10 @@ app.use('/users', usersController);
 app.use('/sessions', sessionsController);
 app.use('/feedback', feedbackController);
 
+app.get('/', function (req, res) {
+  res.redirect('/users')
+});
+
 app.listen(process.env.PORT || 4000, function() {
     console.log("AHOY! Your on port!");
 });
