@@ -1,1 +1,12 @@
-<h1>This is A Post</h1>
+<h1>Make as Post</h1>
+<form action="/feedback" method="post">
+    <div>
+        <label>Subject:</label>
+        <input type="text" name="subject" placeholder="What is the topic?"><br>
+        <input type="radio" name="type" value="postive">postive<br>
+        <input type="radio" name="type" value="negative">negative<br>
+        <label>Details:</label>
+        <textarea placeholder="What are your thoughts?"></textarea>
+        <input type="submit" name="Submit" value="Submit">
+    </div>
+</form>

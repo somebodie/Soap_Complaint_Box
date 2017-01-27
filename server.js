@@ -15,20 +15,22 @@ var feedbackController = require('./controllers/feedback.js');
 var app = express();
 
 // ADD THE NAME OF YOUR DATABASE
-var mongoURI =  process.env.MONGODB_URI || 'mongodb://localhost/sbc';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/sbc';
 mongoose.connect(mongoURI);
 
 app.set('view engine', 'hbs')
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(logger('dev'));
 app.use(methodOverride('_method'));
 
 app.use(session({
-  secret: "derpderpderpcats",
-  resave: false,
-  saveUninitialized: false
+    secret: "derpderpderpcats",
+    resave: false,
+    saveUninitialized: false
 }));
 
 app.use('/users', usersController);
@@ -36,5 +38,5 @@ app.use('/sessions', sessionsController);
 app.use('/feedback', feedbackController);
 
 app.listen(process.env.PORT || 4000, function() {
-  console.log("AHOY! Your on port!");
+    console.log("AHOY! Your on port!");
 });

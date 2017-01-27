@@ -28,8 +28,8 @@ function loginUser(req, res, next) {
 }
 
 function authorized(req, res, next) {
-  var currentUser = req.session.currentUser;
-  if (!currentUser || currentUser._id !== req.params.id) {
+  // var currentUser = req.session.currentUser;  // if (!currentUser || currentUser._id !== req.params.id) { <~~This is for user only action
+  if (req.session.currentUser == null) {
     return res.json({status: 404})
   } else {
     next()
