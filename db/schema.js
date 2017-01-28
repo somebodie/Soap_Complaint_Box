@@ -29,7 +29,7 @@ var UserSchema = new Schema({
         last_name: String
     },
     password_digest: String,
-    feedback: [FeedbackSchema]
+    feedback: [{FeedbackSchema}]
 });
 
 FeedbackSchema.pre('save', function(next) {

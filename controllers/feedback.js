@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
     });
 });
 
-// Feedback post TODO: http://localhost:4000/feedback/newpost
+// Feedback post TODO: http://localhost:4000/feedback/newpost NEW
 router.get('/newpost', authHelpers.authorized, function(req, res) {
     res.render('feedback/newpost.hbs');
 });
@@ -63,30 +63,39 @@ router.get('/:id', function (req, res) {
 
 // Feedback Edit Route testing:588ae8ee6b73cd3daabbdbee || 588b6a3163eee705ae0d2a6b
 router.get('/:id/edit', function(req, res) {
-  var item = Feedback.findById(req.params.id).exec();
-
-  item.then(function(feedback) {
-    res.render('feedback/edit', feedback);
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
+  Feedback.findById(req.params.id)
+      .exec(function(err, feedback) {
+          if (err) console.log(err);
+          console.log(feedback);
+  res.render('feedback/edit.hbs', {
+        feedback
+});
+});
 });
 
 // Feedback UPDATE ROUTE
 router.patch('/:id', authHelpers.authorized, function(req, res){
-  Feedback.findByIdAndUpdate(req.params.id)
-  .exec(function(err, feedback){
-    if (err) { console.log(err); }
-   });
+  Feedback.findByIdAndUpdate(req.params.id, {
+      subject: req.body.subject,
+      detail: req.body.detail,
+      type: req.body.type,
+      id: req.params.id
+    }    , {new: true})
+  .exec(function(err, feedback) {
+    if (err) { console.log(err) }
+        res.render('feedback/show.hbs', { //does not show with the change
+          feedback
+        });
+  });
+
 });
 
 // Feedback DESTROY
-// router.delete('/id', authHelpers.authorized, function(req, res){
-// findbyidanddelete
-//     res.redirect('/feedback')
-//   });
-// });
-
-
+router.delete('/id', authHelpers.authorized, function(req, res){
+Feedback.findbyidanddelete(req.params.id)
+.exec(function (err, feedback) {
+   delete feedback;
+    res.redirect('/feedback')
+});
+});
 module.exports = router;
