@@ -26,7 +26,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(logger('dev'));
-app.use(express.static("public"));//TODO examine further since not showing everywhere
 app.use(methodOverride('_method'));
 
 app.use(session({
@@ -39,8 +38,8 @@ app.use('/users', usersController);
 app.use('/sessions', sessionsController);
 app.use('/feedback', feedbackController);
 
-app.get('/', function (req, res) {
-  res.redirect('/users')
+app.get('/', function(req, res) {
+    res.redirect('/users')
 });
 
 app.listen(process.env.PORT || 4000, function() {

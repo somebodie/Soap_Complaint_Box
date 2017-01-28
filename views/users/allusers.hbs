@@ -2,6 +2,6 @@
 {{#each users}}
     <a href="/users/{{_id}}">{{username}}</a>
     <form method="post" action="/sessions?_method=DELETE">
-      <input type="submit" value="delete">
+        <input type="submit" value="delete">
     </form>
 {{/each}}
