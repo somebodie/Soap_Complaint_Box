@@ -68,26 +68,24 @@ router.get('/:id/edit', function(req, res) {
             if (err) console.log(err);
             console.log(feedback);
             res.render('feedback/edit.hbs', {
-                feedback
+                feedback: {
+                    subject: feedback.subject,
+                    detail: feedback.detail,
+                    type: feedback.type
+                }
             });
         });
 });
 
 // Feedback UPDATE ROUTE
 router.patch('/:id', authHelpers.authorized, function(req, res) {
-    Feedback.findByIdAndUpdate(req.params.id, {
-            subject: req.body.subject,
-            detail: req.body.detail,
-            type: req.body.type,
-            id: req.params.id
-        }, {
-            new: true
-        }),
-        function(err, feedback) {
-            if (err) {
-                console.log(err);
-            }
-        };
+    Feedback.findByIdAndUpdate(req.params.id, feedback)
+        .exec(function(err, feedback) {
+            feedback.subject = req.body.subject,
+                feedback.detail = req.body.detail,
+                feedback.type = req.body.type;
+            res.redirect('/feedback');
+        });
 });
 
 // Feedback DESTROY
