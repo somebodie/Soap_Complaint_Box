@@ -1,12 +1,10 @@
-<h2>Edit this feedback</h2> {{feedback}}
-<form action="/feedback/{{feedback._id}}?_method=patch" method="post">
-    <div>
+<h2>Edit this feedback</h2>
+<form action="/feedback/{{feedback.ID}}?_method=PUT" method="post">
         <label>Subject:</label>
         <input type="text" name="subject" value="{{feedback.subject}}"><br>
         <input type="radio" name="type" value="postive">postive<br>
         <input type="radio" name="type" value="negative">negative<br>
-        <label name="detail">Details:</label>
-        <textarea name="detail" form="detail" value="{{feedback.detail}}">{{feedback.detail}}</textarea>
+        <label>Details:</label>
+        <input type="text" name="detail" value="{{feedback.detail}}"><br>
         <input type="submit" name="Submit" value="Submit">
-    </div>
 </form>

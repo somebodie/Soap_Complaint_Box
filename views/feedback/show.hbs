@@ -1,6 +1,12 @@
 <h1>This is the subject: {{feedback.subject}}</h1>
-<h2>This is the details: {{feedback.detail}}</h2>
-<a href="/feedback/{{feedback._id}}/edit">Edit</a> |
-<form style="display: inline;" action="/feedback/{{feedback._id}}?_method=DELETE" method="POST">
-      <input type="submit" name="" value="X">
-    </form>
+
+
+<p>{{feedback.detail}}</p>
+
+<form action="/feedback/{{feedback.id}}/edit">
+    <input type="submit" value="Edit">
+</form>
+
+<form action="/feedback/{{feedback.id}}?_method=DELETE" method="post">
+    <input type="submit" value="DELETE" />
+</form>
